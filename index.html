@@ -15,28 +15,95 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* Themes */
+/* ── Themes ── */
 :root{
   --paper:#f0f4f0;--paper-dark:#e3ebe3;
   --ink:#1a2a1a;--ink-soft:#3d5c3d;--ink-faint:#7a9e7a;
   --accent:#2d6a4f;--accent-bg:#b7e4c7;
   --danger:#c0392b;--danger-bg:#fdecea;
   --line:rgba(45,106,79,0.15);
+  --sidebar-w:260px;
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
 }
 [data-theme="ocean"]{--paper:#eef4fa;--paper-dark:#ddeaf5;--ink:#0d2137;--ink-soft:#2a5080;--ink-faint:#6899c4;--accent:#1a6ea8;--accent-bg:#bde0f7;--line:rgba(26,110,168,0.15)}
 [data-theme="sand"]{--paper:#faf5ec;--paper-dark:#f0e8d5;--ink:#2a1f0d;--ink-soft:#6b4f2a;--ink-faint:#b89a6a;--accent:#a0522d;--accent-bg:#f5d9b0;--line:rgba(160,82,45,0.15)}
 [data-theme="rose"]{--paper:#fdf0f3;--paper-dark:#f5dde4;--ink:#2a0d15;--ink-soft:#7a3048;--ink-faint:#c47a90;--accent:#b03060;--accent-bg:#f5b7c8;--line:rgba(176,48,96,0.15)}
 [data-theme="slate"]{--paper:#f0f2f5;--paper-dark:#e2e6ed;--ink:#0d1520;--ink-soft:#304060;--ink-faint:#7090b0;--accent:#3a5f8a;--accent-bg:#bdd0e8;--line:rgba(58,95,138,0.15)}
+[data-theme="midnight"]{--paper:#0e1117;--paper-dark:#181e28;--ink:#e8edf5;--ink-soft:#8da0b8;--ink-faint:#445566;--accent:#4f9cf0;--accent-bg:#1a2e44;--danger:#e05c5c;--danger-bg:#2a1414;--line:rgba(79,156,240,0.12)}
+[data-theme="obsidian"]{--paper:#111110;--paper-dark:#1c1b19;--ink:#e8e4dc;--ink-soft:#9e9a8e;--ink-faint:#4a4840;--accent:#c9a84c;--accent-bg:#2a2210;--danger:#e05c5c;--danger-bg:#2a1414;--line:rgba(201,168,76,0.12)}
 
 html,body{min-height:100vh;background:var(--paper);font-family:'DM Sans',sans-serif;color:var(--ink);overscroll-behavior:none;transition:background .3s,color .3s}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 27px,var(--line) 27px,var(--line) 28px)}
+
+/* ── Mobile layout (default) ── */
+.desktop-sidebar{display:none}
 .app{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 0 110px;padding-top:var(--safe-top)}
+
+/* ── Desktop layout (900px+) ── */
+@media(min-width:900px){
+  body::before{background-image:none}
+  body{display:grid;grid-template-columns:var(--sidebar-w) 1fr;min-height:100vh}
+
+  .desktop-sidebar{
+    display:flex;flex-direction:column;
+    background:var(--paper-dark);
+    border-right:2px solid var(--ink);
+    position:sticky;top:0;height:100vh;
+    padding:32px 0 24px;overflow-y:auto;
+    z-index:10;
+  }
+  .sb-brand{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;letter-spacing:3px;color:var(--accent);padding:0 24px 24px;border-bottom:1px solid var(--line);margin-bottom:20px}
+  .sb-section{padding:0 16px;margin-bottom:8px}
+  .sb-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint);padding:0 8px;margin-bottom:6px}
+  .sb-btn{width:100%;padding:10px 12px;background:none;border:none;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink-soft);transition:all .15s;text-align:left}
+  .sb-btn:hover{background:var(--paper);color:var(--ink)}
+  .sb-btn.active{background:var(--accent-bg);color:var(--accent);font-weight:500}
+  .sb-ico{font-size:16px;width:22px;text-align:center}
+  .sb-divider{border:none;border-top:1px solid var(--line);margin:12px 16px}
+  .sb-bottom{margin-top:auto;padding:0 16px}
+  .sb-fab{width:100%;padding:11px 14px;background:var(--ink);color:var(--paper);border:none;border-radius:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;margin-top:8px}
+  .sb-fab:hover{opacity:.85}
+
+  .app{max-width:none;margin:0;padding:0 0 60px;padding-top:0;grid-column:2}
+
+  .header{padding:24px 36px 18px;border-bottom:2px solid var(--ink);position:sticky;top:0;background:var(--paper);z-index:50}
+  .header-top{margin-bottom:0}
+  .brand{display:none}
+
+  .dhead{padding:22px 36px 6px}
+  .dmain{font-size:36px}
+  .dsub{font-size:13px}
+
+  .prog{padding:14px 36px}
+  .tabs{padding:0 36px}
+  .addgbar{padding:20px 36px}
+  .gheader{padding:16px 36px 10px}
+  .task{padding:12px 36px}
+  .gempty{padding:14px 36px}
+  .calwrap{padding:20px 36px}
+  .ibar{margin:12px 36px 0}
+
+  .fabwrap{display:none}
+
+  .drawer{border-radius:14px;bottom:auto;top:50%;left:calc(var(--sidebar-w) + 50%);transform:translate(-50%,-50%) scale(.96);max-width:440px;max-height:85vh}
+  .drawer.on{transform:translate(-50%,-50%) scale(1)}
+  .dhandle{display:none}
+
+  .thbox{border-radius:14px;max-width:500px;margin:0 auto}
+  .thpanel{align-items:center;padding-left:var(--sidebar-w)}
+  .thgrid{grid-template-columns:repeat(7,1fr)}
+
+  .sidepanel{width:380px}
+
+  #gcont{display:grid;grid-template-columns:1fr 1fr;align-items:start}
+  .gblock{border-right:1px solid var(--line)}
+  .gblock:nth-child(even){border-right:none}
+}
 
 /* Header */
 .header{padding:18px 20px 14px;border-bottom:2px solid var(--ink)}
 .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.brand{font-family:'Playfair Display',serif;font-size:14px;font-style:italic;letter-spacing:3px;color:var(--accent)}
+.brand{font-family:'Playfair Display',serif;font-size:19px;font-style:italic;letter-spacing:3px;color:var(--accent)}
 .hbtns{display:flex;gap:8px}
 .hbtn{width:34px;height:34px;background:var(--paper-dark);border:1px solid var(--line);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--ink-soft);transition:all .15s;position:relative}
 .hbtn:hover{background:var(--ink);color:var(--paper)}
@@ -204,7 +271,7 @@ input:checked+.sw-sl::before{transform:translateX(17px);background:#fff}
 .thpanel.on{pointer-events:all;opacity:1}
 .thbox{background:var(--paper);border-radius:16px 16px 0 0;padding:20px;width:100%;max-width:480px;box-shadow:0 -8px 40px rgba(0,0,0,.15);padding-bottom:calc(20px + var(--safe-bottom))}
 .thtit{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:14px}
-.thgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.thgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
 .thswatch{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer}
 .swc{width:44px;height:44px;border-radius:50%;border:3px solid transparent;transition:all .15s}
 .swc.on{border-color:var(--ink);transform:scale(1.1)}
@@ -225,6 +292,51 @@ input:checked+.sw-sl::before{transform:translateX(17px);background:#fff}
 </style>
 </head>
 <body>
+<!-- Desktop sidebar -->
+<aside class="desktop-sidebar">
+  <div class="sb-brand">✦ zenko ✦</div>
+
+  <div class="sb-section">
+    <div class="sb-lbl">View</div>
+    <button class="sb-btn active" id="sb-today" onclick="switchTab('today');setSbActive('sb-today')">
+      <span class="sb-ico">📋</span> Today
+    </button>
+    <button class="sb-btn" id="sb-calendar" onclick="switchTab('calendar');setSbActive('sb-calendar')">
+      <span class="sb-ico">📅</span> Calendar
+    </button>
+  </div>
+
+  <hr class="sb-divider">
+
+  <div class="sb-section">
+    <div class="sb-lbl">Actions</div>
+    <button class="sb-btn" onclick="openTaskDrawer(null)">
+      <span class="sb-ico">＋</span> Add Task
+    </button>
+    <button class="sb-btn" onclick="openGroupDrawer()">
+      <span class="sb-ico">📁</span> Add Group
+    </button>
+  </div>
+
+  <hr class="sb-divider">
+
+  <div class="sb-section">
+    <div class="sb-lbl">Settings</div>
+    <button class="sb-btn" onclick="openThemes()">
+      <span class="sb-ico">🎨</span> Themes
+    </button>
+    <button class="sb-btn" onclick="openNotifPanel()">
+      <span class="sb-ico">🔔</span> Notifications
+    </button>
+  </div>
+
+  <div class="sb-bottom">
+    <button class="sb-fab" onclick="openTaskDrawer(null)">
+      <span style="font-size:16px">+</span> Add Task
+    </button>
+  </div>
+</aside>
+
 <div class="app">
 
   <div class="header">
@@ -389,6 +501,8 @@ input:checked+.sw-sl::before{transform:translateX(17px);background:#fff}
       <div class="thswatch" onclick="setTheme('sand')"><div class="swc" id="sw-sand" style="background:linear-gradient(135deg,#faf5ec,#a0522d)"></div><span class="swlbl">Sand</span></div>
       <div class="thswatch" onclick="setTheme('rose')"><div class="swc" id="sw-rose" style="background:linear-gradient(135deg,#fdf0f3,#b03060)"></div><span class="swlbl">Rose</span></div>
       <div class="thswatch" onclick="setTheme('slate')"><div class="swc" id="sw-slate" style="background:linear-gradient(135deg,#f0f2f5,#3a5f8a)"></div><span class="swlbl">Slate</span></div>
+      <div class="thswatch" onclick="setTheme('midnight')"><div class="swc" id="sw-midnight" style="background:linear-gradient(135deg,#181e28,#4f9cf0)"></div><span class="swlbl">Midnight</span></div>
+      <div class="thswatch" onclick="setTheme('obsidian')"><div class="swc" id="sw-obsidian" style="background:linear-gradient(135deg,#1c1b19,#c9a84c)"></div><span class="swlbl">Obsidian</span></div>
     </div>
   </div>
 </div>
@@ -617,6 +731,7 @@ function switchTab(tab){
   document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',(i===0&&tab==='today')||(i===1&&tab==='calendar')));
   document.getElementById('view-today').style.display=tab==='today'?'block':'none';
   document.getElementById('view-cal').style.display=tab==='calendar'?'block':'none';
+  setSbActive(tab==='today'?'sb-today':'sb-calendar');
 }
 
 // ── Calendar ───────────────────────────────────────────────────
@@ -645,10 +760,29 @@ function renderCalDayTasks(){
 }
 
 // ── Themes ─────────────────────────────────────────────────────
-function setTheme(t){ document.documentElement.setAttribute('data-theme',t);localStorage.setItem('zk_theme',t);document.querySelectorAll('.swc').forEach(e=>e.classList.remove('on'));document.getElementById('sw-'+(t||'default')).classList.add('on');closeThemes(); }
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('zk_theme',t);
+  document.querySelectorAll('.swc').forEach(e=>e.classList.remove('on'));
+  const sw=document.getElementById('sw-'+(t||'default'));
+  if(sw) sw.classList.add('on');
+  closeThemes();
+}
 function openThemes(){ document.getElementById('thov').classList.add('on');document.getElementById('thpanel').classList.add('on'); }
 function closeThemes(){ document.getElementById('thov').classList.remove('on');document.getElementById('thpanel').classList.remove('on'); }
-function loadTheme(){ const t=localStorage.getItem('zk_theme')||'';document.documentElement.setAttribute('data-theme',t);const sw=document.getElementById('sw-'+(t||'default'));if(sw){document.querySelectorAll('.swc').forEach(e=>e.classList.remove('on'));sw.classList.add('on');} }
+function loadTheme(){
+  const t=localStorage.getItem('zk_theme')||'';
+  document.documentElement.setAttribute('data-theme',t);
+  const sw=document.getElementById('sw-'+(t||'default'));
+  if(sw){document.querySelectorAll('.swc').forEach(e=>e.classList.remove('on'));sw.classList.add('on');}
+}
+
+// ── Sidebar active state ────────────────────────────────────────
+function setSbActive(id){
+  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el) el.classList.add('active');
+}
 
 // ── Notifications ──────────────────────────────────────────────
 function openNotifPanel(){ updatePermCard();loadNS();document.getElementById('nov').classList.add('on');document.getElementById('npanel').classList.add('on'); }
