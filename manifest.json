@@ -1,11 +1,11 @@
 {
-  "name": "Today — Task Manager",
-  "short_name": "Today",
-  "description": "A minimal personal task manager with smart reminders",
+  "name": "Zenko — Do Good Today",
+  "short_name": "Zenko",
+  "description": "Zenko — a calm, focused task manager. Do good today.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f5f0e8",
-  "theme_color": "#1a1612",
+  "background_color": "#f0f4f0",
+  "theme_color": "#1a2a1a",
   "orientation": "portrait-primary",
   "scope": "./",
   "icons": [

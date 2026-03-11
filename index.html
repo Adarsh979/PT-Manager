@@ -3,29 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#1a1612">
+<meta name="theme-color" content="#1a2a1a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Today">
-<meta name="description" content="A minimal personal task manager">
+<meta name="apple-mobile-web-app-title" content="Zenko">
+<meta name="description" content="Zenko — a calm, focused task manager">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>Today — Task Manager</title>
+<title>Zenko</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --paper: #f5f0e8;
-    --paper-dark: #ede7d5;
-    --ink: #1a1612;
-    --ink-soft: #5a4f3e;
-    --ink-faint: #a89880;
-    --accent: #c0392b;
-    --accent-light: #e8c4bf;
+    --paper: #f0f4f0;
+    --paper-dark: #e3ebe3;
+    --ink: #1a2a1a;
+    --ink-soft: #3d5c3d;
+    --ink-faint: #7a9e7a;
+    --accent: #2d6a4f;
+    --accent-light: #b7e4c7;
     --green: #2d6a4f;
     --green-light: #b7e4c7;
-    --line: rgba(90,79,62,0.15);
+    --line: rgba(45,106,79,0.15);
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
   }
@@ -42,7 +42,7 @@
     content: '';
     position: fixed;
     inset: 0;
-    background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(90,79,62,0.07) 27px, rgba(90,79,62,0.07) 28px);
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(45,106,79,0.07) 27px, rgba(45,106,79,0.07) 28px);
     pointer-events: none;
     z-index: 0;
   }
@@ -54,6 +54,30 @@
     margin: 0 auto;
     padding: 0 0 110px;
     padding-top: var(--safe-top);
+  }
+
+  /* Zenko brand */
+  .zenko-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: lowercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .zenko-brand::before {
+    content: '✦';
+    font-size: 8px;
+    font-style: normal;
+  }
+  .zenko-brand::after {
+    content: '✦';
+    font-size: 8px;
+    font-style: normal;
   }
 
   /* Header */
@@ -348,6 +372,7 @@
 
 <div class="app">
   <div class="header">
+    <div class="zenko-brand">Zenko</div>
     <div class="date-label" id="header-dayname"></div>
     <div class="date-title" id="header-date"></div>
     <div class="date-sub" id="header-sub"></div>
